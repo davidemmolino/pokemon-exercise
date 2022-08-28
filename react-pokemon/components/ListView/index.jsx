@@ -54,9 +54,18 @@ class ListView extends Component {
       console.log(err);
     }
   }
-
-  debouncedSearch() {
+  
+  debouncedSearch(func, delay) {
     // your code here
+    let timer; 
+    return (...args) => {
+      const delayedFunction = (e) => {
+        clearTimeout(timer);
+        func(...args, delay);
+      }
+      clearTimeout(timer);
+      timer = setTimeout(delayedFunction, delay)
+    }
   }
 
   onChange(e) {
@@ -105,6 +114,7 @@ class ListView extends Component {
 
   render() {
     const { pokemon, bag, searchString, pokemonBagIds } = this.state;
+    //might have used useCallback or useMemo passing down props, depending on dataset or calculation
     return (
       <Flexbox flexDirection='column' alignItems='center' width='100vw'>
         <PokeBag bag={bag} removeFromBag={this.removeFromBag}/>
@@ -124,3 +134,4 @@ class ListView extends Component {
 }
 
 export default ListView;
+// onChange={this.debouncedSearch(this.onChange, 250)}
