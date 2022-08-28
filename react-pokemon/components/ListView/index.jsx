@@ -33,6 +33,7 @@ class ListView extends Component {
     return (
       <Flexbox flexDirection='column' alignItems='center' width='100vw'>
         <Flexbox width='250px' marginTop='13px'>
+          testing
           <input onChange={this.debouncedSearch(this.onChange, 250)} placeholder="Search for a Pokémon!"/>
         </Flexbox>
         <Flexbox marginTop='15px' padding='0px 10vw'>
